@@ -100,13 +100,13 @@ void rungame(char* outputMessage, int chose)
 	}
 	game[input - 1] = player;
 	printgame(outputMessage);
-	if (turn > 5)checkVictory(player, opponent);
+	if (turn > 4)checkVictory(player, opponent);
 OpponentsTurn:
 	Sleep(300);
 	turn++;
 	opponentsMove(player, opponent);
 	printgame("");
-	if (turn > 5) checkVictory(player, opponent);
+	if (turn > 4) checkVictory(player, opponent);
 	rungame(outputMessage, chose);
 }
 
@@ -223,13 +223,15 @@ void checkVictory(char player, char opponent)
 			if (game[i] == game[i + 3] && game[i] == game[i + 6]) printEndscreen("YOU");
 			if (i == 0 && game[i] == game[i + 4] && game[i] == game[i + 8]) printEndscreen("YOU");
 			if (i == 2 && game[i] == game[i + 2] && game[i] == game[i + 4]) printEndscreen("YOU");
-		} else if (game[3 * i] == player && game[3 * i] == game[3 * i + 1] && game[3 * i] == game[3 * i + 2]) printEndscreen("YOU");
+		}
+		if (game[3 * i] == player && game[3 * i] == game[3 * i + 1] && game[3 * i] == game[3 * i + 2]) printEndscreen("YOU");
 		if (game[i] == opponent)
 		{
 			if (game[i] == game[i + 3] && game[i] == game[i + 6]) printEndscreen("OPPONENT");
 			if (i == 0 && game[i] == game[i + 4] && game[i] == game[i + 8]) printEndscreen("OPPONENT");
 			if (i == 2 && game[i] == game[i + 2] && game[i] == game[i + 4]) printEndscreen("OPPONENT");
-		} else if (game[3 * i] == opponent && game[3 * i] == game[3 * i + 1] && game[3 * i] == game[3 * i + 2]) printEndscreen("OPPONENT");
+		}
+		if (game[3 * i] == opponent && game[3 * i] == game[3 * i + 1] && game[3 * i] == game[3 * i + 2]) printEndscreen("OPPONENT");
 	}
 	if (turn > 8) printEndscreen("NOBODY");
 }
