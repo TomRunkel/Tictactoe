@@ -9,6 +9,7 @@
 
 COORD coord = { 0, 0 };
 char game[9] = {'1','2','3','4','5','6','7','8','9'};
+char messageBuffer[PROGRAM_WIDTH + 1] = "";
 int turn = 0;
 int startingPlayer = 0;
 
@@ -47,7 +48,7 @@ void startmenu(char* error, int chose)
 	gameterminal(0, 0);
 	printheader();
 	printmenu(error, chose);
-	}
+}
  
 void startgame(int chose)
 {
@@ -196,18 +197,18 @@ void printEndscreen(char* error)
 	runmenu();
 }
 
-
 char* centerError(char* error)
 {
-	char errorCentered[PROGRAM_WIDTH + 1] = "";
-	char* pErrorCentered = malloc(PROGRAM_WIDTH + 1);
+//	char errorCentered[PROGRAM_WIDTH + 1] = "";
+//	char* pErrorCentered = malloc(PROGRAM_WIDTH + 1);
+	strcpy(messageBuffer, "");
 	for (int i = 0; i < ((PROGRAM_WIDTH - strlen(error)) / 2) - 1; i++)
 	{
-		strcat(errorCentered, " ");
+		strcat(messageBuffer, " ");
 	}
-	strcat(errorCentered, error);
-	if (pErrorCentered != 0) strcpy(pErrorCentered, errorCentered);
-	return pErrorCentered;
+	strcat(messageBuffer, error);
+//	if (pErrorCentered != 0) strcpy(pErrorCentered, errorCentered);
+	return messageBuffer;
 }
 
 void flushInput(void)
