@@ -14,15 +14,15 @@ int turn = 0;
 int startingPlayer = 0;
 
 void gameterminal(int x, int y);
-void startmenu(char* error, int chose);
+void startmenu(char* outputMessage, int chose);
 void startgame(int chose);
-void rungame(char* error, int chose);
+void rungame(char* outputMessage, int chose);
 void runmenu(void);
 void printheader(void);
-void printmenu(char* error, int chose);
-void printgame(char* error);
-void printEndscreen(char* error);
-char* centerError(char* error);
+void printmenu(char* outputMessage, int chose);
+void printgame(char* outputMessage);
+void printEndscreen(char* outputMessage);
+char* centerMessage(char* outputMessage);
 void flushInput(void);
 void checkVictory(char player, char opponent);
 void opponentsMove(char player, char opponent);
@@ -42,12 +42,12 @@ void gameterminal(int x, int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
-void startmenu(char* error, int chose)
+void startmenu(char* outputMessage, int chose)
 {
 	printf("\e[1;1H\e[2J"); //clear terminal
 	gameterminal(0, 0);
 	printheader();
-	printmenu(error, chose);
+	printmenu(outputMessage, chose);
 }
  
 void startgame(int chose)
@@ -63,7 +63,7 @@ void startgame(int chose)
 	startmenu(message, chose);
 }
 
-void rungame(char* error, int chose)
+void rungame(char* outputMessage, int chose)
 {
 	char player = 'X';
 	char opponent = 'X';
@@ -99,7 +99,7 @@ void rungame(char* error, int chose)
 		printgame("Enter a number from 1 - 9!");
 	}
 	game[input - 1] = player;
-	printgame(error);
+	printgame(outputMessage);
 	if (turn > 5)checkVictory(player, opponent);
 OpponentsTurn:
 	Sleep(300);
@@ -107,7 +107,7 @@ OpponentsTurn:
 	opponentsMove(player, opponent);
 	printgame("");
 	if (turn > 5) checkVictory(player, opponent);
-	rungame(error, chose);
+	rungame(outputMessage, chose);
 }
 
 void runmenu(void)
@@ -144,7 +144,7 @@ void printheader(void)
 	printf("                        a game by Tom Runkel                       \n");
 	printf("-------------------------------------------------------------------\n");
 }
-void printmenu(char* error, int chose)
+void printmenu(char* outputMessage, int chose)
 {
 	char choseOne[] = "  ";
 	char choseTwo[] = "  ";
@@ -160,15 +160,15 @@ void printmenu(char* error, int chose)
 	printf("                        %s 2 : Play with O                         \n", choseTwo);
 	printf("                        %s 3 : Exit                                \n", choseThree);
 	printf("                                                                   \n");
-	printf("%s\n", centerError(error));
+	printf("%s\n", centerMessage(outputMessage));
 	printf("                                                                   \n");
 }
-void printgame(char* error)
+void printgame(char* outputMessage)
 {
 	printf("\e[1;1H\e[2J"); //clear terminal
 	gameterminal(0, 0);
 	printheader();
-	printf("%s\n", centerError(error));
+	printf("%s\n", centerMessage(outputMessage));
 	printf("                                                                   \n");
 	printf("                                                                   \n");
 	printf("                              |       |                            \n");
@@ -185,10 +185,10 @@ void printgame(char* error)
 	printf("                                                                   \n");
 }
 
-void printEndscreen(char* error)
+void printEndscreen(char* outputMessage)
 {
 	printf("-------------------------------------------------------------------\n");
-	printf("%s\n", centerError(error));
+	printf("%s\n", centerMessage(outputMessage));
 	printf("                           won the game                            \n");
 	printf("-------------------------------------------------------------------\n");
 	printmenu("", 0);
@@ -197,17 +197,14 @@ void printEndscreen(char* error)
 	runmenu();
 }
 
-char* centerError(char* error)
+char* centerMessage(char* outputMessage)
 {
-//	char errorCentered[PROGRAM_WIDTH + 1] = "";
-//	char* pErrorCentered = malloc(PROGRAM_WIDTH + 1);
 	strcpy(messageBuffer, "");
-	for (int i = 0; i < ((PROGRAM_WIDTH - strlen(error)) / 2) - 1; i++)
+	for (int i = 0; i < ((PROGRAM_WIDTH - strlen(outputMessage)) / 2) - 1; i++)
 	{
 		strcat(messageBuffer, " ");
 	}
-	strcat(messageBuffer, error);
-//	if (pErrorCentered != 0) strcpy(pErrorCentered, errorCentered);
+	strcat(messageBuffer, outputMessage);
 	return messageBuffer;
 }
 
