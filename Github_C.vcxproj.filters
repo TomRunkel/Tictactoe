@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Hello_Github.c">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="tictactoe.c">
       <Filter>Quelldateien</Filter>
     </ClCompile>

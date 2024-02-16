@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Hello_Github.c" />
     <ClCompile Include="tictactoe.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
