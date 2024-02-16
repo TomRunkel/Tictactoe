@@ -1,5 +1,0 @@
-﻿  Hello_Github.c
-  tictactoe.c
-  Code wird generiert...
-tictactoe.obj : error LNK2005: main ist bereits in Hello_Github.obj definiert.
-C:\Users\tom\source\repos\Github_C\x64\Debug\Github_C.exe : fatal error LNK1169: Mindestens ein mehrfach definiertes Symbol gefunden.
