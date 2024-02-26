@@ -44,7 +44,7 @@ void gameterminal(int x, int y)
 
 void startmenu(char* outputMessage, int chose)
 {
-	printf("\e[1;1H\e[2J"); //clear terminal
+	system("cls"); //clear terminal
 	gameterminal(0, 0);
 	printheader();
 	printmenu(outputMessage, chose);
@@ -52,13 +52,13 @@ void startmenu(char* outputMessage, int chose)
  
 void startgame(int chose)
 {
-	char player = 'X';
-	char opponent = 'X';
-	(chose == 1) ? (opponent = 'O') : (player = 'O');
+	char* player = "X";
+	char* opponent = "X";
+	(chose == 1) ? (opponent = "O") : (player = "O");
 	char message[PROGRAM_WIDTH] = "You chose ";
-	strncat(message, &player, 1);
+	strncat(message, player, 1);
 	strcat(message, ", your opponent takes ");
-	strncat(message, &opponent, 1);
+	strncat(message, opponent, 1);
 	strcat(message, ".");
 	startmenu(message, chose);
 }
@@ -151,9 +151,9 @@ void printmenu(char* outputMessage, int chose)
 	char choseThree[] = "  ";
 	switch (chose)
 	{
-	case 1: strcpy(choseOne, "->"); break;
-	case 2: strcpy(choseTwo, "->"); break;
-	case 3: strcpy(choseThree, "->"); break;
+	case 1: strncpy(choseOne, "->", 2); break;
+	case 2: strncpy(choseTwo, "->", 2); break;
+	case 3: strncpy(choseThree, "->", 2); break;
 	}
 	
 	printf("                        %s 1 : Play with X                         \n", choseOne);
@@ -165,7 +165,7 @@ void printmenu(char* outputMessage, int chose)
 }
 void printgame(char* outputMessage)
 {
-	printf("\e[1;1H\e[2J"); //clear terminal
+	system("cls"); //clear terminal
 	gameterminal(0, 0);
 	printheader();
 	printf("%s\n", centerMessage(outputMessage));
@@ -199,12 +199,12 @@ void printEndscreen(char* outputMessage)
 
 char* centerMessage(char* outputMessage)
 {
-	strcpy(messageBuffer, "");
+	strncpy(messageBuffer, "", 1);
 	for (int i = 0; i < ((PROGRAM_WIDTH - strlen(outputMessage)) / 2) - 1; i++)
 	{
-		strcat(messageBuffer, " ");
+		strncat(messageBuffer, " ", 1);
 	}
-	strcat(messageBuffer, outputMessage);
+	strncat(messageBuffer, outputMessage, strlen(outputMessage)+1);
 	return messageBuffer;
 }
 
